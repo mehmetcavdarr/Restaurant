@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Order Detail</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f8f8f8;
+            margin: 0;
+            padding: 0;
+        }
+
+        header {
+            background-color: #333;
+            color: #fff;
+            padding: 1rem;
+            text-align: center;
+        }
+
+        h1, h3 {
+            margin: 0;
+            font-size: 2rem;
+            color: #333;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 2rem auto;
+            background: #fff;
+            padding: 1.5rem;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .order-info p {
+            font-size: 1rem;
+            margin: 0.5rem 0;
+        }
+
+        .order-info strong {
+            color: #555;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 1.5rem;
+        }
+
+        table th, table td {
+            padding: 0.8rem;
+            text-align: left;
+            border: 1px solid #ddd;
+        }
+
+        table thead {
+            background-color: #333;
+            color: #fff;
+        }
+
+        table tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+
+        a {
+            text-decoration: none;
+            color: #007bff;
+            margin-top: 1.5rem;
+            display: inline-block;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Order Detail</h1>
+    </header>
+    <div class="container">
+        <div class="order-info">
+            <p><strong>Order ID:</strong> <span th:text="${order.id}">1</span></p>
+            <p><strong>Order Name:</strong> <span th:text="${order.name}">Sample Order</span></p>
+            <p><strong>Description:</strong> <span th:text="${order.description}">Some Description</span></p>
+            <p><strong>Total Price:</strong> $<span th:text="${order.price}">100.0</span></p>
+        </div>
+
+        <hr>
+
+        <h3>Order Items</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th>Menu Item Name</th>
+                    <th>Quantity</th>
+                    <th>Item Price</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- order.orderItems üzerinden döngü -->
+                <tr th:each="orderItem : ${order.orderItems}">
+                    <td th:text="${orderItem.menuItem.name}">Burger</td>
+                    <td th:text="${orderItem.quantity}">1</td>
+                    <td th:text="${orderItem.price}">$50.0</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <a href="/orders">Back to Order List</a>
+    </div>
+</body>
+</html>

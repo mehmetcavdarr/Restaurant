@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Create Menu Item</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f8f8f8;
+            margin: 0;
+            padding: 0;
+        }
+
+        header {
+            background-color: #333;
+            color: #fff;
+            padding: 1rem;
+            text-align: center;
+        }
+
+        h1 {
+            margin: 0;
+            font-size: 2rem;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 2rem auto;
+            background: #fff;
+            padding: 1.5rem;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+        }
+
+        label {
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+        }
+
+        input, textarea, select {
+            padding: 0.5rem;
+            margin-bottom: 1.5rem;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            width: 100%;
+        }
+
+        button {
+            padding: 0.7rem 1rem;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            font-size: 1rem;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        .back-link {
+            text-align: center;
+            margin-top: 1rem;
+        }
+
+        .back-link a {
+            text-decoration: none;
+            color: #007bff;
+        }
+
+        .back-link a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1 th:text="${menuItem.id == null ? 'Create New Menu Item' : 'Edit Menu Item'}"></h1>
+    </header>
+    <div class="container">
+        <form th:action="@{/menu}" th:object="${menuItem}" method="post">
+            <!-- Hidden ID Field -->
+            <input type="hidden" th:field="*{id}" />
+
+            <!-- Name Input -->
+            <label for="name">Name:</label>
+            <input type="text" id="name" th:field="*{name}" placeholder="Enter item name" required />
+
+            <!-- Description Input -->
+            <label for="description">Description:</label>
+            <textarea id="description" th:field="*{description}" rows="4" placeholder="Enter description" required></textarea>
+
+            <!-- Price Input -->
+            <label for="price">Price:</label>
+            <input type="number" id="price" th:field="*{price}" step="0.01" placeholder="Enter price" required />
+
+            <!-- Category Selection -->
+            <label for="category">Category:</label>
+            <select id="category" th:field="*{category.id}" required>
+                <option value="" disabled selected>Select a category</option>
+                <option th:each="category : ${categories}" th:value="${category.id}" th:text="${category.name}">
+                    Sample Category
+                </option>
+            </select>
+
+            <!-- Submit Button -->
+            <button type="submit" th:text="${menuItem.id == null ? 'Create Menu Item' : 'Update Menu Item'}"></button>
+        </form>
+
+        <div class="back-link">
+            <a th:href="@{/menu}">Back to Menu List</a>
+        </div>
+    </div>
+</body>
+</html>
