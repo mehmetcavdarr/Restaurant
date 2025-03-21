@@ -41,10 +41,10 @@ This is a Spring Boot-based REST API project simulating a simple restaurant mana
 
 ## Authors
 
-- İbrahim Bayır
-- Mehmet Çavdar
-- Salih Efehan Demir
-
+- [Mehmet Çavdar](https://github.com/mehmetcavdarr)
+- [Salih Efehan Demir](https://github.com/SalihEfehanDemir)
+- [İbrahim Bayır](https://github.com/ibrahimbayir)
+- 
 ## License
 
 This project is for educational purposes.
